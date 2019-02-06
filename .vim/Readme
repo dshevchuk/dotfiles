@@ -4,7 +4,6 @@ But it shouldn't be too difficult to reconfigure it to use with Gvim/Macvim.
 In order to use this config do next:
 Install font 'Monaco for Powerline'
 
-$ git clone https://github.com/constan4in/dotvim.git ~/.vim
 $ ln -s ~/.vim/gvimrc ~/.vimrc
 
 Install Vundle
