@@ -1,0 +1,20 @@
+My VIM config is optimized for using Vim in Iterm 2 on OS X.
+But it shouldn't be too difficult to reconfigure it to use with Gvim/Macvim.
+
+In order to use this config do next:
+Install font 'Monaco for Powerline'
+
+$ git clone https://github.com/constan4in/dotvim.git ~/.vim
+$ ln -s ~/.vim/gvimrc ~/.vimrc
+
+Install Vundle
+
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+Install plugins
+
+$ vim ~/.vimrc
+
+Run the following command in vim
+:BundleInstall
+
