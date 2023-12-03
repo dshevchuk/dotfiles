@@ -2,10 +2,13 @@
 ## The list of items:
 - oh-my-zsh
 - Homebrew
-- Tmux
 - Git
 - JDK
-- Vim
+- iTerm
+- Vim (outdated, too old)
+- NeoVim
+- Tmux
+- Tools
 
  
 ## Install oh-my-zsh
@@ -17,12 +20,6 @@ Apply [.zshrc](/.zshrc)
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-
-## Install Tmux
-```shell
-brew install tmux
-```
-Apply config from [.tmux.conf](/.tmux.conf)
 
 ## Setup Git
 Apple's model of Git comes preinstalled on macOS. Open up your Terminal or shell script editor of choice and enter git --version to verify which version of Git is on your machine. If not already on your machine, running git --version will prompt you to install Git.
@@ -40,10 +37,25 @@ For M1 Oracle adjust only version 17. For comform work we need version 8 and 11+
 
 JAVA_HOME and alias for switch between sdks located in [.zshrc](/.zshrc)
 
+## iTerm
+```shell
+brew install --cask iterm2
+```
+**Powerlevel10k** - https://github.com/romkatv/powerlevel10k
+```
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+Docs about fonts for Powerlevel10k - https://github.com/romkatv/powerlevel10k/blob/master/font.md
 
----- Text bellow is under review ----
+**NerdFonts** - https://www.nerdfonts.com/font-downloads
 
-## vim
+**Nord theme ports** - https://www.nordtheme.com/ports
+
+**ColorLS** - https://github.com/athityakumar/colorls
+
+Install the colorls ruby gem with `gem install colorls`
+
+## vim (outdated, use NeoVim)
 Install vim
 ```shell
 brew install vim
@@ -66,9 +78,51 @@ Run the following command in vim
 :BundleInstall
 ```
 
-## TODO
-create install sh script
+## NeoVim
+```shell
+brew install neovim
+```
+Base setup and configuration with Lua - https://www.youtube.com/watch?v=J9yqSdvAKXY
 
-----------------
+Kickstart.nvim - https://github.com/nvim-lua/kickstart.nvim
+
+
+## Install Tmux
+```shell
+brew install tmux
+```
+Apply config from [.tmux.conf](/.tmux.conf)
+
+Install [TMP](https://github.com/tmux-plugins/tpm) (Tmux plugin manager)
+
+Nice quick guide - https://www.youtube.com/watch?v=H70lULWJeig
+
+Tmux guide from **thoughtbot** - https://thoughtbot.com/blog/a-tmux-crash-course
+
+_TBD: Do I need a tmuxinator? template layout composition of tmux panes_
+
+
+
+## Install Tmux
+```shell
+brew install tmux
+```
+Apply config from [.tmux.conf](/.tmux.conf)
+
+Install [TMP](https://github.com/tmux-plugins/tpm) (Tmux plugin manager)
+
+Nice quick guide - https://www.youtube.com/watch?v=H70lULWJeig
+
+Tmux guide from **thoughtbot** - https://thoughtbot.com/blog/a-tmux-crash-course
+
+_TBD: Do I need a tmuxinator? template layout composition of tmux panes_
+
+
+## Tools
+- **Btop** instead of Htop or top - https://github.com/aristocratos/btop
+- **Bat**, a cat(1) clone with syntax highlighting and Git integration - https://github.com/sharkdp/bat
+- **CMatrix**, Matrix like effect in your terminal - https://github.com/abishekvashok/cmatrix
+
+
 PS: [Github basic writing and formatting syntax
 ](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)

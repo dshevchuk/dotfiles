@@ -1,14 +1,22 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export USER_HOME=/Users/dshevchuk
+export USER_HOME=/Users/dshev
 
 export LANG=en_US.UTF-8
 
-# unset JAVA_HOME
-# export JAVA_HOME=$(/usr/libexec/java_home -v "1.8.301.09")
+# set JAVA_HOME
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 plugins=(
@@ -16,6 +24,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
 
 # ZLE config
 bindkey -v
@@ -29,14 +38,18 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-export EDITOR=vim
-export VISUAL=vim
+alias vim9="/opt/homebrew/bin/vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 bindkey -M vicmd '^s' history-incremental-search-backward
 bindkey -M viins '^s' history-incremental-search-backward
+
+
+# Setup PATH
 
 # Personal local scripts
 PATH=$PATH:$USER_HOME/bin
@@ -46,32 +59,16 @@ export ANDROID_HOME=$USER_HOME/Library/Android/sdk
 PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 # Setup AndroidStudio vars - GRADLE
-PATH=$PATH:"/Applications/Android Studio.app/Contents/gradle/gradle-4.6/bin/"
-
-# Setup Maven
-export MAVEN_HOME=$USER_HOME/Library/apache-maven-3.5.0
-PATH=$PATH:$MAVEN_HOME/bin
-
-# Setup Ant
-export ANT_HOME=$USER_HOME/Library/apache-ant-1.10.1
-PATH=$PATH:$ANT_HOME/bin
-
-# Setting PATH for Python 2.7
-# The original version is saved in .bash_profile.pysave
-# PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-
-# Fluffer - https://flutter.io
-PATH=$PATH:$USER_HOME/Library/flutter/bin
-
-# fix java setup for BigSur
-PATH=$PATH:/Applications/"Android Studio.app"/Contents/jre/jdk/Contents/Home/bin
-#export JAVA_HOME=/Applications/"Android Studio.app"/Contents/jre/jdk/Contents/Home
-export JAVA_HOME=/Applications/"Android Studio 4.app"/Contents/jre/Contents/Home
+#PATH=$PATH:"/Applications/Android Studio.app/Contents/gradle/gradle-4.6/bin/"
 
 export PATH
 
-# Personal configs
+
+# Personal dev configs
 source ~/dev/.zshrc
+
+# Homebrew setup
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # Aliases
@@ -84,31 +81,34 @@ alias nvimrc="$EDITOR ~/.config/nvim/init.vim"
 alias git_aliases='vim ~/.oh-my-zsh/plugins/git/git.plugin.zsh'
 alias reload_zconf="source ~/.zshrc"
 
-alias mux='tmuxinator'
-alias mc="/usr/local/Cellar/midnight-commander/4.8.22/libexec/mc/mc-wrapper.sh"
-alias ic="ionic cordova"
-alias adb-restart="adb kill-server && adb start-server"
-alias lcat="adb logcat -v color"
-alias godev="cd ~/dev"
+alias switch_to_java_8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
+alias switch_to_java_11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
+alias switch_to_java_17="export JAVA_HOME=$(/usr/libexec/java_home -v 17)"
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+
 alias c="clear"
-alias dartd="dart --enable-asserts"
-alias fl="flutter"
-alias dex2jar="sh /Users/dshevchuk/Library/Android/dex2jar/d2j-dex2jar.sh -f"
+alias godev="cd ~/dev"
+alias l="colorls -l --sd"
+alias ll="colorls -lA --sd"
 
-alias ktr="sh ktrun.sh"
-alias kts="kotlinc -script " 
-
-alias timeAttendance="vim ~/GoogleDrive/timeAttendance.md"
-
-# adb -s 10.50.50.124:5555 exec-out screencap -p > $(date +"%Y-%m-%d_%H-%M-%S").png
+alias adb-restart="adb kill-server && adb start-server"
 alias adb-screenshot="adb exec-out screencap -p > $(date +"%Y-%m-%d_%H-%M-%S").png"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# NVM to manage Node and npm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+## Setup fzf
+# ---------
+if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+fi
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/dshevchuk/.sdkman"
-[[ -s "/Users/dshevchuk/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/dshevchuk/.sdkman/bin/sdkman-init.sh"
+# Auto-completion
+# ---------------
+source "/opt/homebrew/opt/fzf/shell/completion.zsh"
+
+# Key bindings
+# ------------
+source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+## End setup fzf
