@@ -27,7 +27,7 @@ Apple's model of Git comes preinstalled on macOS. Open up your Terminal or shell
 After it you need create and add SSH keys, guide is here -> [Connecting to GitHub with SSH
 ](https://docs.github.com/en/authentication/connecting-to-github-with-ssh). In this case you could clone private repo via ssh, but it will be denied via https :( Open repos should be ok.
 
-When you'll work with git all your metadata should be specified in project directory, in other case it will use `.gitconfig` from the USER_HOME directory. Create `.gitconfig` from [.gitconfig](https://github.com/dshevchuk/env_setup/blob/master/.gitconfig_template) and add [.gitignore_global](https://github.com/dshevchuk/env_setup/blob/master/.gitignore_global)ellow  is under review
+When you'll work with git all your metadata should be specified in project directory, in other case it will use `.gitconfig` from the USER_HOME directory. Create `.gitconfig` from [.gitconfig](https://github.com/dshevchuk/env_setup/blob/master/.gitconfig_template) and add [.gitignore_global](https://github.com/dshevchuk/env_setup/blob/master/.gitignore_global) bellow is under review
 
 
 ## Instal JDK
