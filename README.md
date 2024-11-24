@@ -55,6 +55,7 @@ Docs about fonts for Powerlevel10k - https://github.com/romkatv/powerlevel10k/bl
 
 Install the colorls ruby gem with `gem install colorls`
 
+
 ## vim (outdated, use NeoVim)
 Install vim
 ```shell
@@ -77,6 +78,7 @@ Run the following command in vim
 ```shell
 :BundleInstall
 ```
+
 
 ## NeoVim
 ```shell
